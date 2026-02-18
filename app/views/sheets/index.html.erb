@@ -1,0 +1,31 @@
+<h1>座席選択</h1>
+
+<div style="text-align: center; margin: 20px 0;">
+  <strong>スクリーン</strong>
+</div>
+
+<table style="margin: 0 auto; border-collapse: collapse;">
+  <% @sheets.group_by(&:row).sort.each do |row, seats| %>
+    <tr>
+      <% seats.sort_by(&:column).each do |sheet| %>
+        <td style="border: 1px solid #ccc; padding: 10px; text-align: center; width: 60px;">
+          <%= "#{sheet.row}-#{sheet.column}" %>
+        </td>
+      <% end %>
+    </tr>
+  <% end %>
+</table>
+
+<style>
+  table {
+    margin-top: 20px;
+  }
+  
+  td {
+    cursor: pointer;
+  }
+  
+  td:hover {
+    background-color: #f0f0f0;
+  }
+</style>
