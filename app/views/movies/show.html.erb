@@ -39,6 +39,36 @@
   </tr>
 </table>
 
+<h2 style="margin-top: 30px;">上映スケジュール</h2>
+
+<% if @schedules.present? %>
+  <table>
+    <thead>
+      <tr>
+        <th>ID</th>
+        <th>開始時刻</th>
+        <th>終了時刻</th>
+        <th>上映時間</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @schedules.each do |schedule| %>
+        <tr>
+          <td><%= schedule.id %></td>
+          <td><%= schedule.start_time.strftime('%H:%M') %></td>
+          <td><%= schedule.end_time.strftime('%H:%M') %></td>
+          <td>
+            <% duration = ((schedule.end_time - schedule.start_time) / 60).to_i %>
+            <%= "#{duration}分" %>
+          </td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+<% else %>
+  <p>この映画のスケジュールはまだ登録されていません。</p>
+<% end %>
+
 <div style="margin-top: 20px;">
   <%= link_to "一覧に戻る", movies_path %>
 </div>
